@@ -45,6 +45,8 @@ $dir = "./MyProject/requirements";
     </style>
 </head>
 <body>
+    <input type="button" value="store in vcs" />
+    <input type="button" value="create documents" />
     <h1>requirements</h1>
     <input id="max" type="button" value="expand all" onclick="expand_all();" />
     <input id="min" type="button" value="minimize_all" onclick="minimize_all();" />
