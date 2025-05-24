@@ -37,6 +37,36 @@ class RequirementManager
                 case "Type":
                     $req->Type = $element[1];
                     break;
+                case "Invented on":
+                    $req->Invented_on = $element[1];
+                    break;
+                case "Invented by":
+                    $req->Invented_by = $element[1];
+                    break;
+                case "Owner":
+                    $req->Owner = $element[1];
+                    break;
+                case "Description":
+                    $req->Description = $element[1];
+                    break;
+                case "Rationale":
+                    $req->Rationale = $element[1];
+                    break;
+                case "Status":
+                    $req->Status = $element[1];
+                    break;
+                case "Priority":
+                    $req->Priority = $element[1];
+                    break;
+                case "Effort estimation":
+                    $req->Effort_estimation = $element[1];
+                    break;
+                case "Topic":
+                    $req->Topic = $element[1];
+                    break;
+                case "Test Cases":
+                    $req->Test_Cases = $element[1];
+                    break;                 
             }
             $line = strtok( $separator );
         }
