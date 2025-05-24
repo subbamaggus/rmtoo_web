@@ -20,20 +20,12 @@ $dir = "./MyProject/requirements";
     <script>
     function expand_all() { 
         document.body.querySelectorAll('details').forEach(
-            (e) => {
-                e.setAttribute('open',true);
-                console.log(e.hasAttribute('open'))
-            }
-        
+            (e) => { e.setAttribute('open',true); }
         )
     }
     function minimize_all() { 
         document.body.querySelectorAll('details').forEach(
-            (e) => {
-                e.removeAttribute('open');
-                console.log(e.hasAttribute('open'))
-            }
-        
+            (e) => { e.removeAttribute('open'); }
         )
     }
     </script>
