@@ -40,18 +40,22 @@ $dir = "./MyProject/requirements";
     }
     </script>
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
         label,input {
             display:flex;
             flex-direction:column;
         }
         
         hr.new5 {
-            border: 10px solid green;
+            border: 10px solid LightSkyBlue;
             border-radius: 5px;
         }
     </style>
 </head>
 <body>
+    <h1>requirements</h1>
     <input id="max" type="button" value="expand all" onclick="expand_all();" />
     <input id="min" type="button" value="minimize_all" onclick="minimize_all();" />
 <?php
