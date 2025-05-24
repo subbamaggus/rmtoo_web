@@ -73,6 +73,11 @@ class RequirementManager
         
         return $req;
     }
+    
+    function getReqFromFile(string $filename) {
+        $content = $this->getFileContent($filename);
+        return $this->parseContent($content);
+    }
 }
 
 ?>
