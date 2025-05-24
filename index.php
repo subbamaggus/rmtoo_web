@@ -13,13 +13,25 @@ $files1 = scandir($dir);
 <html lang="en-US">
 <head>
 
-  <title>rmtoo web ui</title>
+    <title>rmtoo web ui</title>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+    function expand_all() { 
+        document.body.querySelectorAll('details').forEach(
+            (e) => {
+                (e.hasAttribute('open')) ?
+                e.removeAttribute('open') : e.setAttribute('open',true);
+                console.log(e.hasAttribute('open'))
+            }
+        
+        )
+    }
+  </script>
 </head>
 <body>
+    <input id="clickMe" type="button" value="expand all" onclick="expand_all();" />
 <?php
 
 foreach ($files1 as $key => $value)
@@ -31,14 +43,18 @@ foreach ($files1 as $key => $value)
       {
          $myReq = $myManager->getReqFromFile($dir . DIRECTORY_SEPARATOR . $value);
          //print_r($myReq);
-         $name = $myReq->Name;
-         $description = $myReq->Description;
+         $Name = $myReq->Name;
+         $Description = $myReq->Description;
+         $Invented_on = $myReq->Invented_on;
          
          $element = <<<END
-           <details>
-             <summary>${name}</summary>
-             <p>${description}</p>
-           </details>
+            <details>
+                <summary>${Name}</summary>
+                <form>
+                    <p>${Description}</p>
+                    <input type="date" id="date-input" name="date-input" value="${Invented_on}">
+                </form>
+            </details>
          \n
          END;
          

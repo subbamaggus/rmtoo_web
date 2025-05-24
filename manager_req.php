@@ -32,13 +32,13 @@ class RequirementManager
             $element = explode(':', $line, 2);
             switch ($element[0]) {
                 case "Name":
-                    $req->Name = $element[1];
+                    $req->Name = trim($element[1]);
                     break;
                 case "Type":
                     $req->Type = $element[1];
                     break;
                 case "Invented on":
-                    $req->Invented_on = $element[1];
+                    $req->Invented_on = trim($element[1]);
                     break;
                 case "Invented by":
                     $req->Invented_by = $element[1];
