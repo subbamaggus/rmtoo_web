@@ -9,6 +9,7 @@ class Requirement {
     public string $Description = "";
     public string $Rationale = "";
     public string $Status = "";
+    public string $Solved_by = "";
     public string $Priority = "";
     public string $Effort_estimation = "";
     public string $Topic = "";
@@ -56,6 +57,9 @@ class RequirementManager
                 case "Status":
                     $req->Status = trim($element[1]);
                     break;
+                case "Solved by":
+                    $req->Solved_by = trim($element[1]);
+                    break;
                 case "Priority":
                     $req->Priority = trim($element[1]);
                     break;
@@ -78,6 +82,10 @@ class RequirementManager
     function getReqFromFile(string $filename) {
         $content = $this->getFileContent($filename);
         return $this->parseContent($content);
+    }
+    
+    function putFileContent(string $filename, string $content) {
+        file_put_contents($filename, $content, false);
     }
 }
 

@@ -70,8 +70,9 @@ foreach ($files1 as $key => $value)
                 <hr class="new5">
             <details>
                 <summary>{$myReq->Name}</summary>
-                <form action="save.php">
+                <form action="save.php" method="POST">
                     <input type="hidden" name="id" value="{$file}">
+                    <input type="hidden" name="Name" value="{$myReq->Name}"></label>
                     <label>Topic<input name="Topic" value="{$myReq->Topic}"></label><br>
                     <label>Type<input name="Type" value="{$myReq->Type}"></label><br>
 
@@ -83,6 +84,7 @@ foreach ($files1 as $key => $value)
                     <br>
 
                     <label>Status<input name="Status" value="{$myReq->Status}"></label><br>
+                    <label>Solved by<input name="Solved_by" value="{$myReq->Solved_by}"></label><br>
                     <label>Priority<input name="Priority" value="{$myReq->Priority}"></label><br>
                     <label>Effort_estimation<input name="Effort_estimation" value="{$myReq->Effort_estimation}"></label><br>
 
