@@ -21,8 +21,7 @@ $dir = "./MyProject/requirements";
     function expand_all() { 
         document.body.querySelectorAll('details').forEach(
             (e) => {
-                (e.hasAttribute('open')) ?
-                e.removeAttribute('open') : e.setAttribute('open',true);
+                e.setAttribute('open',true);
                 console.log(e.hasAttribute('open'))
             }
         
@@ -31,8 +30,7 @@ $dir = "./MyProject/requirements";
     function minimize_all() { 
         document.body.querySelectorAll('details').forEach(
             (e) => {
-                (e.hasAttribute('open')) ?
-                e.removeAttribute('open') : e.setAttribute('open',false);
+                e.removeAttribute('open');
                 console.log(e.hasAttribute('open'))
             }
         
