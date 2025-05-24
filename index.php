@@ -42,17 +42,24 @@ foreach ($files1 as $key => $value)
       if (!is_dir($dir . DIRECTORY_SEPARATOR . $value))
       {
          $myReq = $myManager->getReqFromFile($dir . DIRECTORY_SEPARATOR . $value);
-         //print_r($myReq);
-         $Name = $myReq->Name;
-         $Description = $myReq->Description;
-         $Invented_on = $myReq->Invented_on;
+
          
          $element = <<<END
             <details>
-                <summary>${Name}</summary>
+                <summary>{$myReq->Name}</summary>
                 <form>
-                    <p>${Description}</p>
-                    <input type="date" id="date-input" name="date-input" value="${Invented_on}">
+                    <p>{$myReq->Type}</p>
+                    <input type="date" id="date-input" name="date-input" value="{$myReq->Invented_on}">
+                    <p>{$myReq->Invented_by}</p>
+                    <p>{$myReq->Owner}</p>
+                    <p>{$myReq->Description}</p>
+                    <p>{$myReq->Rationale}</p>
+                    <p>{$myReq->Status}</p>
+                    <p>{$myReq->Priority}</p>
+                    <p>{$myReq->Effort_estimation}</p>
+                    <p>{$myReq->Topic}</p>
+                    <p>{$myReq->Test_Cases}</p>
+
                 </form>
             </details>
          \n

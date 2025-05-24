@@ -1,18 +1,18 @@
 <?php
 
 class Requirement {
-    public string $Name;
-    public string $Type;
-    public string $Invented_on;
-    public string $Invented_by;
-    public string $Owner;
-    public string $Description;
-    public string $Rationale;
-    public string $Status;
-    public string $Priority;
-    public string $Effort_estimation;
-    public string $Topic;
-    public string $Test_Cases;
+    public string $Name = "";
+    public string $Type = "";
+    public string $Invented_on = "";
+    public string $Invented_by = "";
+    public string $Owner = "";
+    public string $Description = "";
+    public string $Rationale = "";
+    public string $Status = "";
+    public string $Priority = "";
+    public string $Effort_estimation = "";
+    public string $Topic = "";
+    public string $Test_Cases = "";
 }
 
 class RequirementManager
