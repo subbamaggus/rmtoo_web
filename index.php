@@ -6,25 +6,7 @@ $myManager = new RequirementManager();
 
 $dir = "./MyProject/requirements";
 
-$myReq = $myManager->getReqFromFile("./MyProject/requirements/req1.req");
-
 $files1 = scandir($dir);
-
-
-foreach ($files1 as $key => $value)
-{
-   if (!in_array($value,array(".","..")))
-   {
-
-      if (!is_dir($dir . DIRECTORY_SEPARATOR . $value))
-      {
-         $myReq = $myManager->getReqFromFile($dir . DIRECTORY_SEPARATOR . $value);
-         print_r($myReq);
-      }
-
-   }
-
-}
 
 ?>
 <!doctype html>
@@ -38,11 +20,33 @@ foreach ($files1 as $key => $value)
 
 </head>
 <body>
+<?php
 
+foreach ($files1 as $key => $value)
+{
+   if (!in_array($value,array(".","..")))
+   {
 
-  <details>
-    <summary>Expandable motherfucker</summary>
-    <p>Fucking boo, motherfucker 👻</p>
-  </details>
+      if (!is_dir($dir . DIRECTORY_SEPARATOR . $value))
+      {
+         $myReq = $myManager->getReqFromFile($dir . DIRECTORY_SEPARATOR . $value);
+         //print_r($myReq);
+         $name = $myReq->Name;
+         $description = $myReq->Description;
+         
+         $element = <<<END
+           <details>
+             <summary>${name}</summary>
+             <p>${description}</p>
+           </details>
+         \n
+         END;
+         
+         echo $element;
+      }
+   }
+}
+
+?>
 </body>
 </html>
