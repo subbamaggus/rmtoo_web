@@ -25,6 +25,7 @@ class RequirementManager
     
     function parseContent(string $content) {
         $req = new Requirement();
+        
         $separator = "\r\n";
         $line = strtok($content, $separator);
         
@@ -35,37 +36,37 @@ class RequirementManager
                     $req->Name = trim($element[1]);
                     break;
                 case "Type":
-                    $req->Type = $element[1];
+                    $req->Type = trim($element[1]);
                     break;
                 case "Invented on":
                     $req->Invented_on = trim($element[1]);
                     break;
                 case "Invented by":
-                    $req->Invented_by = $element[1];
+                    $req->Invented_by = trim($element[1]);
                     break;
                 case "Owner":
-                    $req->Owner = $element[1];
+                    $req->Owner = trim($element[1]);
                     break;
                 case "Description":
-                    $req->Description = $element[1];
+                    $req->Description = trim($element[1]);
                     break;
                 case "Rationale":
-                    $req->Rationale = $element[1];
+                    $req->Rationale = trim($element[1]);
                     break;
                 case "Status":
-                    $req->Status = $element[1];
+                    $req->Status = trim($element[1]);
                     break;
                 case "Priority":
-                    $req->Priority = $element[1];
+                    $req->Priority = trim($element[1]);
                     break;
                 case "Effort estimation":
-                    $req->Effort_estimation = $element[1];
+                    $req->Effort_estimation = trim($element[1]);
                     break;
                 case "Topic":
-                    $req->Topic = $element[1];
+                    $req->Topic = trim($element[1]);
                     break;
                 case "Test Cases":
-                    $req->Test_Cases = $element[1];
+                    $req->Test_Cases = trim($element[1]);
                     break;                 
             }
             $line = strtok( $separator );
