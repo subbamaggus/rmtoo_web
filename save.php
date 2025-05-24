@@ -5,7 +5,7 @@ require('manager_req.php');
 $myManager = new RequirementManager();
 
 function format_post(array $post_array, string $value) {
-    return $value . ": " . $post_array[$value] . "\r\n";
+    return str_replace("_", " ", $value) . ": " . $post_array[$value] . "\r\n";
 }
 
 $data = format_post($_POST, "Name");
@@ -22,10 +22,10 @@ $data .= format_post($_POST, "Effort_estimation");
 $data .= format_post($_POST, "Topic");
 $data .= format_post($_POST, "Test_Cases");
 
-$myManager->putFileContent($_POST["id"] . ".bak", $data);
+$myManager->putFileContent($_POST["id"], $data);
 
-print_r($data);
+//print_r($data);
 
-//header('Location: index.php');
+header('Location: index.php');
 
 ?>
