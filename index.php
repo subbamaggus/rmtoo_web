@@ -54,7 +54,7 @@ $nav = $myManager->getNavigation($projects_root);
             font-size:1em
         }
 
-        input {
+        input, select {
             font-size:2em
         }
         
@@ -163,6 +163,8 @@ if("" <> $active_project)
                             
                             <label>{$datakey}<select name="{$datakey}[]" multiple>
                                 <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="saab">Saab</option>
                                 <option value="saab">Saab</option>
                             </select>
                             </label>
