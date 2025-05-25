@@ -30,8 +30,27 @@ class DataManager
         return $this->parseContent($content);
     }
     
-    function putFileContent(string $filename, string $content) {
-        file_put_contents($filename, $content, false);
+    function format_post(array $post_array, string $value) {
+        return str_replace("_", " ", $value) . ": " . $post_array[$value] . "\r\n";
+    }
+    
+    function putFileContent(array $postdata) {
+
+        $data = $this->format_post($postdata, "Name");
+        $data .= $this->format_post($postdata, "Type");
+        $data .= $this->format_post($postdata, "Invented_on");
+        $data .= $this->format_post($postdata, "Invented_by");
+        $data .= $this->format_post($postdata, "Owner");
+        $data .= $this->format_post($postdata, "Description");
+        $data .= $this->format_post($postdata, "Rationale");
+        $data .= $this->format_post($postdata, "Status");
+        $data .= $this->format_post($postdata, "Solved_by");
+        $data .= $this->format_post($postdata, "Priority");
+        $data .= $this->format_post($postdata, "Effort_estimation");
+        $data .= $this->format_post($postdata, "Topic");
+        $data .= $this->format_post($postdata, "Test_Cases");
+        
+        file_put_contents($postdata["id"], $data, false);
     }
 }
 
