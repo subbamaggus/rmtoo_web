@@ -73,7 +73,7 @@ foreach ($project_dirs as $key => $value)
         }
         
         hr.new5 {
-            border: 4px solid LightSkyBlue;
+            border: 4px solid ForestGreen;
             border-radius: 5px;
         }
     </style>
