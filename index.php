@@ -110,27 +110,27 @@ if("" <> $active_project)
                     
                     <hr class="new5">
                     <details>
-                        <summary>{$myReq->Name}</summary>
+                        <summary>{$myReq["Name"]}</summary>
                         <form action="save.php" method="POST">
                             <input type="hidden" name="id" value="{$file}">
-                            <input type="hidden" name="Name" value="{$myReq->Name}"></label>
-                            <label>Topic<input name="Topic" value="{$myReq->Topic}"></label>
-                            <label>Type<input name="Type" value="{$myReq->Type}"></label>
+                            <input type="hidden" name="Name" value="{$myReq["Name"]}"></label>
+                            <label>Topic<input name="Topic" value="{$myReq["Topic"]}"></label>
+                            <label>Type<input name="Type" value="{$myReq["Type"]}"></label>
         
-                            <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq->Invented_on}"></label>
-                            <label>Invented_by<input name="Invented_by" value="{$myReq->Invented_by}"></label>
+                            <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq["Invented on"]}"></label>
+                            <label>Invented_by<input name="Invented_by" value="{$myReq["Invented by"]}"></label>
         
-                            <label>Owner<input name="Owner" value="{$myReq->Owner}"></label>
+                            <label>Owner<input name="Owner" value="{$myReq["Owner"]}"></label>
         
-                            <label>Status<input name="Status" value="{$myReq->Status}"></label>
-                            <label>Solved by<input name="Solved_by" value="{$myReq->Solved_by}"></label>
-                            <label>Priority<input name="Priority" value="{$myReq->Priority}"></label>
-                            <label>Effort_estimation<input name="Effort_estimation" value="{$myReq->Effort_estimation}"></label>
+                            <label>Status<input name="Status" value="{$myReq["Status"]}"></label>
+                            <label>Solved by<input name="Solved_by" value="{$myReq["Solved by"]}"></label>
+                            <label>Priority<input name="Priority" value="{$myReq["Priority"]}"></label>
+                            <label>Effort_estimation<input name="Effort_estimation" value="{$myReq["Effort estimation"]}"></label>
         
-                            <label>Description<input name="Description" value="{$myReq->Description}"></label>
-                            <label>Rationale<input name="Rationale" value="{$myReq->Rationale}"></label>
+                            <label>Description<input name="Description" value="{$myReq["Description"]}"></label>
+                            <label>Rationale<input name="Rationale" value="{$myReq["Rationale"]}"></label>
         
-                            <label>Test_Cases<input name="Test_Cases" value="{$myReq->Test_Cases}"></label>
+                            <label>Test_Cases<input name="Test_Cases" value="{$myReq["Test Cases"]}"></label>
                             
                             <p align="right"><input type="submit" value="save"></p>
                         </form>
