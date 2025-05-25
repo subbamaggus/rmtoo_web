@@ -158,7 +158,7 @@ if("" <> $active_project)
                             <label>{$datakey}<input type="date" name="{$datakey}" value="{$datacontent}"></label>
                         
                             END;
-                        } elseif("testcase" == $datavalue) {
+                        } elseif("testcases" == $datavalue) {
                             $element .= <<<END
                             
                             <label>{$datakey}<select name="{$datakey}[]" multiple>

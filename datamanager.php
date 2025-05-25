@@ -5,7 +5,7 @@ class DataManager
     public $data_fields = array();
 
     function __construct() {
-        $this->data_fields["requirements"] = array("Name" => "string", "Type" => "string", "Invented on" => "date", "Invented by" => "string", "Owner" => "string", "Description" => "string", "Rationale" => "string", "Status" => "string", "Solved by" => "string", "Priority" => "string", "Effort estimation" => "string", "Topic" => "string", "Test Cases" => "testcase");
+        $this->data_fields["requirements"] = array("Name" => "string", "Type" => "string", "Invented on" => "date", "Invented by" => "string", "Owner" => "string", "Description" => "string", "Rationale" => "string", "Status" => "string", "Solved by" => "string", "Priority" => "string", "Effort estimation" => "string", "Topic" => "string", "Test Cases" => "testcases");
         $this->data_fields["testcases"] = array("Name" => "string", "Owner" => "string", "Invented by" => "string", "Invented on" => "date", "Description" => "string", "Expected Result" => "string", "Note" => "string");
     }
     
