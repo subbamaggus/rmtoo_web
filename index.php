@@ -148,44 +148,34 @@ if("" <> $active_project)
                             <input type="hidden" name="Name" value="{$myReq["Name"]}">
                             
                     END;
-  
-                    if("requirements" == $folder) 
-                        $element .= <<<END
-                            
-                            <label>Topic<input name="Topic" value="{$myReq["Topic"]}"></label>
-                            <label>Type<input name="Type" value="{$myReq["Type"]}"></label>
-            
-                            <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq["Invented on"]}"></label>
-                            <label>Invented_by<input name="Invented_by" value="{$myReq["Invented by"]}"></label>
-            
-                            <label>Owner<input name="Owner" value="{$myReq["Owner"]}"></label>
-            
-                            <label>Status<input name="Status" value="{$myReq["Status"]}"></label>
-                            <label>Solved by<input name="Solved_by" value="{$myReq["Solved by"]}"></label>
-                            <label>Priority<input name="Priority" value="{$myReq["Priority"]}"></label>
-                            <label>Effort_estimation<input name="Effort_estimation" value="{$myReq["Effort estimation"]}"></label>
-            
-                            <label>Description<input name="Description" value="{$myReq["Description"]}"></label>
-                            <label>Rationale<input name="Rationale" value="{$myReq["Rationale"]}"></label>
-            
-                            <label>Test_Cases<input name="Test_Cases" value="{$myReq["Test Cases"]}"></label>
-        
-                            END;
-                        
-                    if("testcases" == $folder) 
-                        $element .= <<<END
-                
-                            <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq["Invented on"]}"></label>
-                            <label>Invented_by<input name="Invented_by" value="{$myReq["Invented by"]}"></label>
-                
-                            <label>Owner<input name="Owner" value="{$myReq["Owner"]}"></label>
-                
-                            <label>Description<input name="Description" value="{$myReq["Description"]}"></label>
-                            <label>Expected_Result<input name="Expected_Result" value="{$myReq["Expected Result"]}"></label>
-                
-                            <label>Note<input name="Note" value="{$myReq["Note"]}"></label>
                     
+                    foreach($folders[$folder] as $datakey => $datavalue) {
+                        $datacontent = $myReq[$datakey];
+                        
+                        if("date" == $datavalue) {
+                            $element .= <<<END
+                            
+                            <label>{$datakey}<input type="date" name="{$datakey}" value="{$datacontent}"></label>
+                        
                             END;
+                        } elseif("testcase" == $datavalue) {
+                            $element .= <<<END
+                            
+                            <label>{$datakey}<select name="{$datakey}[]" multiple>
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                            </select>
+                            </label>
+                        
+                            END;
+                        } else {
+                            $element .= <<<END
+                            
+                            <label>{$datakey}<input name="{$datakey}" value="{$datacontent}"></label>
+                        
+                            END;
+                        }
+                    }
 
                     $element .= <<<END
                             

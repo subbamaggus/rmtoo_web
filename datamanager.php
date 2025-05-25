@@ -5,8 +5,8 @@ class DataManager
     public $data_fields = array();
 
     function __construct() {
-        $this->data_fields["requirements"] = array("Name", "Type", "Invented on", "Invented by", "Owner", "Description", "Rationale", "Status", "Solved by", "Priority", "Effort estimation", "Topic", "Test Cases");
-        $this->data_fields["testcases"] = array("Name", "Owner", "Invented by", "Invented on", "Description", "Expected Result", "Note");
+        $this->data_fields["requirements"] = array("Name" => "string", "Type" => "string", "Invented on" => "date", "Invented by" => "string", "Owner" => "string", "Description" => "string", "Rationale" => "string", "Status" => "string", "Solved by" => "string", "Priority" => "string", "Effort estimation" => "string", "Topic" => "string", "Test Cases" => "testcase");
+        $this->data_fields["testcases"] = array("Name" => "string", "Owner" => "string", "Invented by" => "string", "Invented on" => "date", "Description" => "string", "Expected Result" => "string", "Note" => "string");
     }
     
     function getDataStruct() {
@@ -43,15 +43,22 @@ class DataManager
     
     function format_post(array $post_array, string $value) {
         $key = str_replace(" ", "_", $value);
-        return $value . ": " . $post_array[$key] . "\r\n";
+        
+        if(is_array($post_array[$key]))
+            $result = implode(" ", $post_array[$key]);
+        else
+            $result = $post_array[$key];
+        
+        return $value . ": " . $result . "\r\n";
     }
     
     function putFileContent(array $postdata) {
         $datatype = $postdata["datatype"];
-        
+        error_log(print_r($postdata, TRUE));        
         $data = "";
         foreach($this->data_fields[$datatype] as $key => $value) {
-            $localdata = $this->format_post($postdata, $value);
+
+            $localdata = $this->format_post($postdata, $key);
             $data .= $localdata;
         }
         
