@@ -14,24 +14,10 @@ if(isset($_GET["project"]))
     $active_project = $_GET["project"];
 }
 
+$myManager = new DataManager();
+
 $projects_root = "./";
-$project_dirs = scandir($projects_root);
-$projects = array();
-$nav = "";
-foreach ($project_dirs as $key => $value)
-{
-    if (!in_array($value,array(".","..",".git")))
-    {
-        $file = $projects_root . DIRECTORY_SEPARATOR . $value;
-        if (is_dir($file))
-        {
-            $projects[] = $value;
-            $nav .= <<<END
-            <a href="?project={$value}">{$value}</a> - 
-            END;            
-        }
-    }
-}
+$nav = $myManager->getNavigation($projects_root);
 
 ?>
 <!doctype html>
@@ -101,7 +87,6 @@ if("" <> $active_project)
     <input id="min" type="button" value="minimize_all" onclick="minimize_all();" />
 <?php
     $whole_script = "";
-    $myManager = new DataManager();
     
     $folders = $myManager->getDataStruct();
     foreach ($folders as $folder => $folderarray) {
@@ -163,8 +148,7 @@ if("" <> $active_project)
                             <input type="hidden" name="Name" value="{$myReq["Name"]}">
                             
                     END;
-
-                            
+  
                     if("requirements" == $folder) 
                         $element .= <<<END
                             
@@ -186,7 +170,7 @@ if("" <> $active_project)
             
                             <label>Test_Cases<input name="Test_Cases" value="{$myReq["Test Cases"]}"></label>
         
-                        END;
+                            END;
                         
                     if("testcases" == $folder) 
                         $element .= <<<END
@@ -201,7 +185,7 @@ if("" <> $active_project)
                 
                             <label>Note<input name="Note" value="{$myReq["Note"]}"></label>
                     
-                        END;
+                            END;
 
                     $element .= <<<END
                             
@@ -209,7 +193,7 @@ if("" <> $active_project)
                         </form>
                     </details>
         
-                END;
+                    END;
             
                     echo $element;
                 }

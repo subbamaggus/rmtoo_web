@@ -59,6 +59,27 @@ class DataManager
         
         return true;
     }
+    
+    function getNavigation(string $root) {
+        $project_dirs = scandir($root);
+        $projects = array();
+        $nav = "";
+        foreach ($project_dirs as $key => $value)
+        {
+            if (!in_array($value, array(".","..",".git")))
+            {
+                $file = $root . DIRECTORY_SEPARATOR . $value;
+                if (is_dir($file))
+                {
+                    $projects[] = $value;
+                    $nav .= <<<END
+                    <a href="?project={$value}">{$value}</a> - 
+                    END;            
+                }
+            }
+        }
+        return $nav;
+    }
 }
 
 ?>
