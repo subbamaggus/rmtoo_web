@@ -80,6 +80,7 @@ foreach ($project_dirs as $key => $value)
 </head>
 <body>
 <?php echo $nav; ?>
+
     <hr class="new5">
     <input type="button" value="store in vcs" />
     <input type="button" value="create documents" />
@@ -98,9 +99,9 @@ if("" <> $active_project)
     <input id="max" type="button" value="expand all" onclick="expand_all();" />
     <input id="min" type="button" value="minimize_all" onclick="minimize_all();" />
 <?php
-    $folders = array("requirements", "testcases");
-    
-    foreach ($folders as $folder) {
+
+    $folders = $myManager->getDataStruct();
+    foreach ($folders as $folder => $folderarray) {
         
         echo "<h2>" . $folder . "</h2>";
 
@@ -116,7 +117,7 @@ if("" <> $active_project)
                 
                 if (!is_dir($file))
                 {
-                    $myReq = $myManager->getReqFromFile($file);
+                    $myReq = $myManager->getDataFromFile($file);
                     $pre = "req_";
                     
                     $script = <<<END
@@ -152,7 +153,9 @@ if("" <> $active_project)
                         <summary>{$myReq["Name"]}</summary>
                         <form id="{$pre}{$file_name}">
                             <input type="hidden" name="id" value="{$file}">
-                            <input type="hidden" name="Name" value="{$myReq["Name"]}"></label>
+                            <input type="hidden" name="datatype" value="{$folder}">
+                            <input type="hidden" name="Name" value="{$myReq["Name"]}">
+                            
                             <label>Topic<input name="Topic" value="{$myReq["Topic"]}"></label>
                             <label>Type<input name="Type" value="{$myReq["Type"]}"></label>
             
@@ -184,7 +187,8 @@ if("" <> $active_project)
                         <summary>{$myReq["Name"]}</summary>
                         <form id="{$pre}{$file_name}">
                             <input type="hidden" name="id" value="{$file}">
-                            <input type="hidden" name="Name" value="{$myReq["Name"]}"></label>
+                            <input type="hidden" name="datatype" value="{$folder}">
+                            <input type="hidden" name="Name" value="{$myReq["Name"]}">
                 
                             <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq["Invented on"]}"></label>
                             <label>Invented_by<input name="Invented_by" value="{$myReq["Invented by"]}"></label>

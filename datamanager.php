@@ -2,6 +2,17 @@
 
 class DataManager
 {
+    public $data_fields = array();
+
+    function __construct() {
+        $this->data_fields["requirements"] = array("Name", "Type", "Invented on", "Invented by", "Owner", "Description", "Rationale", "Status", "Solved by", "Priority", "Effort estimation", "Topic", "Test Cases");
+        $this->data_fields["testcases"] = array("Name", "Owner", "Invented by", "Invented on", "Description", "Expected Result", "Note");
+    }
+    
+    function getDataStruct() {
+        return $this->data_fields;
+    }
+    
     function getFileContent(string $filename) {
         $content = file_get_contents($filename, true);
         
@@ -25,30 +36,24 @@ class DataManager
         return $req;
     }
     
-    function getReqFromFile(string $filename) {
+    function getDataFromFile(string $filename) {
         $content = $this->getFileContent($filename);
         return $this->parseContent($content);
     }
     
     function format_post(array $post_array, string $value) {
-        return str_replace("_", " ", $value) . ": " . $post_array[$value] . "\r\n";
+        $key = str_replace(" ", "_", $value);
+        return $value . ": " . $post_array[$key] . "\r\n";
     }
     
     function putFileContent(array $postdata) {
-
-        $data = $this->format_post($postdata, "Name");
-        $data .= $this->format_post($postdata, "Type");
-        $data .= $this->format_post($postdata, "Invented_on");
-        $data .= $this->format_post($postdata, "Invented_by");
-        $data .= $this->format_post($postdata, "Owner");
-        $data .= $this->format_post($postdata, "Description");
-        $data .= $this->format_post($postdata, "Rationale");
-        $data .= $this->format_post($postdata, "Status");
-        $data .= $this->format_post($postdata, "Solved_by");
-        $data .= $this->format_post($postdata, "Priority");
-        $data .= $this->format_post($postdata, "Effort_estimation");
-        $data .= $this->format_post($postdata, "Topic");
-        $data .= $this->format_post($postdata, "Test_Cases");
+        $datatype = $postdata["datatype"];
+        
+        $data = "";
+        foreach($this->data_fields[$datatype] as $key => $value) {
+            $localdata = $this->format_post($postdata, $value);
+            $data .= $localdata;
+        }
         
         file_put_contents($postdata["id"], $data, false);
         
