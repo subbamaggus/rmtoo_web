@@ -107,6 +107,7 @@ if("" <> $active_project)
                 $myReq = $myManager->getReqFromFile($file);
     
                 $element = <<<END
+                    
                     <hr class="new5">
                     <details>
                         <summary>{$myReq->Name}</summary>
@@ -134,7 +135,7 @@ if("" <> $active_project)
                             <p align="right"><input type="submit" value="save"></p>
                         </form>
                     </details>
-            \n
+
             END;
             
                 echo $element;
