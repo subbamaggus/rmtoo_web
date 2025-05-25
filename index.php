@@ -58,9 +58,18 @@ foreach ($project_dirs as $key => $value)
         body {
             font-family: Arial, Helvetica, sans-serif;
         }
+        
         label,input {
             display:flex;
             flex-direction:column;
+        }
+        
+        label {
+            font-size:1vw
+        }
+
+        input {
+            font-size:2vw
         }
         
         hr.new5 {
@@ -71,8 +80,10 @@ foreach ($project_dirs as $key => $value)
 </head>
 <body>
 <?php echo $nav; ?>
+    <hr class="new5">
     <input type="button" value="store in vcs" />
     <input type="button" value="create documents" />
+    <hr class="new5">
 <?php
 
 
@@ -97,34 +108,32 @@ if("" <> $active_project)
     
                 $element = <<<END
                     <hr class="new5">
-                <details>
-                    <summary>{$myReq->Name}</summary>
-                    <form action="save.php" method="POST">
-                        <input type="hidden" name="id" value="{$file}">
-                        <input type="hidden" name="Name" value="{$myReq->Name}"></label>
-                        <label>Topic<input name="Topic" value="{$myReq->Topic}"></label><br>
-                        <label>Type<input name="Type" value="{$myReq->Type}"></label><br>
-    
-                        <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq->Invented_on}"></label><br>
-                        <label>Invented_by<input name="Invented_by" value="{$myReq->Invented_by}"></label><br>
-    
-                        <label>Owner<input name="Owner" value="{$myReq->Owner}"></label><br>
-                        
-                        <br>
-    
-                        <label>Status<input name="Status" value="{$myReq->Status}"></label><br>
-                        <label>Solved by<input name="Solved_by" value="{$myReq->Solved_by}"></label><br>
-                        <label>Priority<input name="Priority" value="{$myReq->Priority}"></label><br>
-                        <label>Effort_estimation<input name="Effort_estimation" value="{$myReq->Effort_estimation}"></label><br>
-    
-                        <label>Description<textarea name="Description" cols="50" rows="4">{$myReq->Description}</textarea></label><br>
-                        <label>Rationale<textarea name="Rationale" cols="50" rows="4">{$myReq->Rationale}</textarea></label><br>
-    
-                        <label>Test_Cases<input name="Test_Cases" value="{$myReq->Test_Cases}"></label>
-                        
-                        <P align="right"><input type="submit" value="save"></p>
-                    </form>
-                </details>
+                    <details>
+                        <summary>{$myReq->Name}</summary>
+                        <form action="save.php" method="POST">
+                            <input type="hidden" name="id" value="{$file}">
+                            <input type="hidden" name="Name" value="{$myReq->Name}"></label>
+                            <label>Topic<input name="Topic" value="{$myReq->Topic}"></label>
+                            <label>Type<input name="Type" value="{$myReq->Type}"></label>
+        
+                            <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq->Invented_on}"></label>
+                            <label>Invented_by<input name="Invented_by" value="{$myReq->Invented_by}"></label>
+        
+                            <label>Owner<input name="Owner" value="{$myReq->Owner}"></label>
+        
+                            <label>Status<input name="Status" value="{$myReq->Status}"></label>
+                            <label>Solved by<input name="Solved_by" value="{$myReq->Solved_by}"></label>
+                            <label>Priority<input name="Priority" value="{$myReq->Priority}"></label>
+                            <label>Effort_estimation<input name="Effort_estimation" value="{$myReq->Effort_estimation}"></label>
+        
+                            <label>Description<input name="Description" value="{$myReq->Description}"></label>
+                            <label>Rationale<input name="Rationale" value="{$myReq->Rationale}"></label>
+        
+                            <label>Test_Cases<input name="Test_Cases" value="{$myReq->Test_Cases}"></label>
+                            
+                            <p align="right"><input type="submit" value="save"></p>
+                        </form>
+                    </details>
             \n
             END;
             
