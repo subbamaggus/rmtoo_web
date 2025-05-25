@@ -85,6 +85,7 @@ class RequirementManager
     }
     
     function putFileContent(string $filename, string $content) {
+        error_log($filename);
         file_put_contents($filename, $content, false);
     }
 }

@@ -3,14 +3,15 @@
 require('manager_req.php');
 
 $active_project = "";
-if(isset($_GET["project"]))
-{
-    setcookie("active_project", $_GET["project"], time() + (86400 * 30), "/");
-}
-
 if(isset($_COOKIE["active_project"]))
 {
     $active_project = $_COOKIE["active_project"];
+}
+
+if(isset($_GET["project"]))
+{
+    setcookie("active_project", $_GET["project"], time() + (86400 * 30), "/");
+    $active_project = $_GET["project"];
 }
 
 $projects_root = "./";
