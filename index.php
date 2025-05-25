@@ -72,6 +72,10 @@ foreach ($project_dirs as $key => $value)
             font-size:2em
         }
         
+        hr.big {
+            border: 10px solid ForestGreen;
+            border-radius: 5px;
+        }
         hr.new5 {
             border: 4px solid ForestGreen;
             border-radius: 5px;
@@ -79,19 +83,16 @@ foreach ($project_dirs as $key => $value)
     </style>
 </head>
 <body>
-<?php echo $nav; ?>
+    <?php echo $nav; ?>
 
     <hr class="new5">
     <input type="button" value="store in vcs" />
     <input type="button" value="create documents" />
-    <hr class="new5">
+    <hr class="big">
 <?php
 
 if("" <> $active_project)
-{   
-    $whole_script = "";
-    $myManager = new DataManager();
-    
+{
 ?>
 
     <h1><?php echo $active_project; ?></h1>
@@ -99,11 +100,16 @@ if("" <> $active_project)
     <input id="max" type="button" value="expand all" onclick="expand_all();" />
     <input id="min" type="button" value="minimize_all" onclick="minimize_all();" />
 <?php
-
+    $whole_script = "";
+    $myManager = new DataManager();
+    
     $folders = $myManager->getDataStruct();
     foreach ($folders as $folder => $folderarray) {
         
-        echo "<h2>" . $folder . "</h2>";
+?>
+
+    <h2><?php echo $folder; ?></h2>
+<?php
 
         $dir = $projects_root . DIRECTORY_SEPARATOR . $active_project . DIRECTORY_SEPARATOR . $folder;
         $files1 = scandir($dir);
@@ -142,11 +148,11 @@ if("" <> $active_project)
                             event.preventDefault();
                             sendData_{$pre}{$file_name}();
                         });
-                END;
+                    END;
+                    
                     $whole_script .= $script;
-        
-                    if("requirements" == $folder) 
-                        $element = <<<END
+
+                    $element = <<<END
                         
                     <hr class="new5">
                     <details>
@@ -155,6 +161,12 @@ if("" <> $active_project)
                             <input type="hidden" name="id" value="{$file}">
                             <input type="hidden" name="datatype" value="{$folder}">
                             <input type="hidden" name="Name" value="{$myReq["Name"]}">
+                            
+                    END;
+
+                            
+                    if("requirements" == $folder) 
+                        $element .= <<<END
                             
                             <label>Topic<input name="Topic" value="{$myReq["Topic"]}"></label>
                             <label>Type<input name="Type" value="{$myReq["Type"]}"></label>
@@ -173,22 +185,11 @@ if("" <> $active_project)
                             <label>Rationale<input name="Rationale" value="{$myReq["Rationale"]}"></label>
             
                             <label>Test_Cases<input name="Test_Cases" value="{$myReq["Test Cases"]}"></label>
-                            
-                            <p align="right"><input type="submit" value="save"></p>
-                        </form>
-                    </details>
         
-                END;
+                        END;
+                        
                     if("testcases" == $folder) 
-                        $element = <<<END
-                    
-                    <hr class="new5">
-                    <details>
-                        <summary>{$myReq["Name"]}</summary>
-                        <form id="{$pre}{$file_name}">
-                            <input type="hidden" name="id" value="{$file}">
-                            <input type="hidden" name="datatype" value="{$folder}">
-                            <input type="hidden" name="Name" value="{$myReq["Name"]}">
+                        $element .= <<<END
                 
                             <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq["Invented on"]}"></label>
                             <label>Invented_by<input name="Invented_by" value="{$myReq["Invented by"]}"></label>
@@ -199,6 +200,10 @@ if("" <> $active_project)
                             <label>Expected_Result<input name="Expected_Result" value="{$myReq["Expected Result"]}"></label>
                 
                             <label>Note<input name="Note" value="{$myReq["Note"]}"></label>
+                    
+                        END;
+
+                    $element .= <<<END
                             
                             <p align="right"><input type="submit" value="save"></p>
                         </form>
@@ -210,6 +215,12 @@ if("" <> $active_project)
                 }
             }
         }
+?>
+        <hr class="new5">
+        <input type="button" value="new Element for <?php echo $folder; ?>" />
+        <hr class="big">
+        
+<?php
     }
 }
 ?>
