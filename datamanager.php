@@ -1,6 +1,6 @@
 <?php
 
-class RequirementManager
+class DataManager
 {
     function getFileContent(string $filename) {
         $content = file_get_contents($filename, true);
@@ -31,7 +31,6 @@ class RequirementManager
     }
     
     function putFileContent(string $filename, string $content) {
-        error_log($filename);
         file_put_contents($filename, $content, false);
     }
 }

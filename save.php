@@ -1,8 +1,8 @@
 <?php
 
-require('manager_req.php');
+require('datamanager.php');
 
-$myManager = new RequirementManager();
+$myManager = new DataManager();
 
 function format_post(array $post_array, string $value) {
     return str_replace("_", " ", $value) . ": " . $post_array[$value] . "\r\n";

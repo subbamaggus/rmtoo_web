@@ -1,6 +1,6 @@
 <?php
 
-require('manager_req.php');
+require('datamanager.php');
 
 $active_project = "";
 if(isset($_COOKIE["active_project"]))
@@ -94,7 +94,7 @@ if("" <> $active_project)
     <input id="max" type="button" value="expand all" onclick="expand_all();" />
     <input id="min" type="button" value="minimize_all" onclick="minimize_all();" />
 <?php
-    $myManager = new RequirementManager();
+    $myManager = new DataManager();
     $dir = $projects_root . DIRECTORY_SEPARATOR . $active_project . DIRECTORY_SEPARATOR . "requirements";
     $files1 = scandir($dir);
     foreach ($files1 as $key => $value)
