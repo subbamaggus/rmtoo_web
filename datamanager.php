@@ -51,6 +51,8 @@ class DataManager
         $data .= $this->format_post($postdata, "Test_Cases");
         
         file_put_contents($postdata["id"], $data, false);
+        
+        return true;
     }
 }
 

@@ -4,8 +4,8 @@ require('datamanager.php');
 
 $myManager = new DataManager();
 
-$myManager->putFileContent($_POST);
+$result["value"] = $myManager->putFileContent($_POST);
 
-header('Location: index.php');
+echo json_encode($result);
 
 ?>
