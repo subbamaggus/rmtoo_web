@@ -97,165 +97,116 @@ if("" <> $active_project)
     
     <input id="max" type="button" value="expand all" onclick="expand_all();" />
     <input id="min" type="button" value="minimize_all" onclick="minimize_all();" />
-    
-    <h2>requirements</h2>
-    
 <?php
-
-    $dir = $projects_root . DIRECTORY_SEPARATOR . $active_project . DIRECTORY_SEPARATOR . "requirements";
-    $files1 = scandir($dir);
-    foreach ($files1 as $key => $value)
-    {
-        if (!in_array($value,array(".","..")))
-        {
-            $file = $dir . DIRECTORY_SEPARATOR . $value;
-            $info = pathinfo($value);
-            $file_name =  basename($file,'.'.$info['extension']);
-            
-            if (!is_dir($file))
-            {
-                $myReq = $myManager->getReqFromFile($file);
-                $pre = "req_";
-                
-                $script = <<<END
-                    const form_{$pre}{$file_name} = document.querySelector("#{$pre}{$file_name}");
-                    
-                    async function sendData_{$pre}{$file_name}() {
-                        // Associate the FormData object with the form element
-                        const formData_{$pre}{$file_name} = new FormData(form_{$pre}{$file_name});
-                        
-                        try {
-                            const response_{$pre}{$file_name} = await fetch("save.php", {
-                                method: "POST",
-                                body: formData_{$pre}{$file_name},
-                            });
-                            console.log(await response_{$pre}{$file_name}.json());
-                        } catch (e) {
-                            console.error(e);
-                        }
-                    }
-                    
-                    // Take over form submission
-                    form_{$pre}{$file_name}.addEventListener("submit", (event) => {
-                        event.preventDefault();
-                        sendData_{$pre}{$file_name}();
-                    });
-            END;
-                $whole_script .= $script;
+    $folders = array("requirements", "testcases");
     
-                $element = <<<END
-                    
-                <hr class="new5">
-                <details>
-                    <summary>{$myReq["Name"]}</summary>
-                    <form id="{$pre}{$file_name}">
-                        <input type="hidden" name="id" value="{$file}">
-                        <input type="hidden" name="Name" value="{$myReq["Name"]}"></label>
-                        <label>Topic<input name="Topic" value="{$myReq["Topic"]}"></label>
-                        <label>Type<input name="Type" value="{$myReq["Type"]}"></label>
+    foreach ($folders as $folder) {
         
-                        <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq["Invented on"]}"></label>
-                        <label>Invented_by<input name="Invented_by" value="{$myReq["Invented by"]}"></label>
-        
-                        <label>Owner<input name="Owner" value="{$myReq["Owner"]}"></label>
-        
-                        <label>Status<input name="Status" value="{$myReq["Status"]}"></label>
-                        <label>Solved by<input name="Solved_by" value="{$myReq["Solved by"]}"></label>
-                        <label>Priority<input name="Priority" value="{$myReq["Priority"]}"></label>
-                        <label>Effort_estimation<input name="Effort_estimation" value="{$myReq["Effort estimation"]}"></label>
-        
-                        <label>Description<input name="Description" value="{$myReq["Description"]}"></label>
-                        <label>Rationale<input name="Rationale" value="{$myReq["Rationale"]}"></label>
-        
-                        <label>Test_Cases<input name="Test_Cases" value="{$myReq["Test Cases"]}"></label>
-                        
-                        <p align="right"><input type="submit" value="save"></p>
-                    </form>
-                </details>
+        echo "<h2>" . $folder . "</h2>";
 
-            END;
+        $dir = $projects_root . DIRECTORY_SEPARATOR . $active_project . DIRECTORY_SEPARATOR . $folder;
+        $files1 = scandir($dir);
+        foreach ($files1 as $key => $value)
+        {
+            if (!in_array($value,array(".","..")))
+            {
+                $file = $dir . DIRECTORY_SEPARATOR . $value;
+                $info = pathinfo($value);
+                $file_name =  basename($file,'.'.$info['extension']);
+                
+                if (!is_dir($file))
+                {
+                    $myReq = $myManager->getReqFromFile($file);
+                    $pre = "req_";
+                    
+                    $script = <<<END
+                    
+                        const form_{$pre}{$file_name} = document.querySelector("#{$pre}{$file_name}");
+                        
+                        async function sendData_{$pre}{$file_name}() {
+                            const formData_{$pre}{$file_name} = new FormData(form_{$pre}{$file_name});
+                            
+                            try {
+                                const response_{$pre}{$file_name} = await fetch("save.php", {
+                                    method: "POST",
+                                    body: formData_{$pre}{$file_name},
+                                });
+                                console.log(await response_{$pre}{$file_name}.json());
+                            } catch (e) {
+                                console.error(e);
+                            }
+                        }
+
+                        form_{$pre}{$file_name}.addEventListener("submit", (event) => {
+                            event.preventDefault();
+                            sendData_{$pre}{$file_name}();
+                        });
+                END;
+                    $whole_script .= $script;
+        
+                    if("requirements" == $folder) 
+                        $element = <<<END
+                        
+                    <hr class="new5">
+                    <details>
+                        <summary>{$myReq["Name"]}</summary>
+                        <form id="{$pre}{$file_name}">
+                            <input type="hidden" name="id" value="{$file}">
+                            <input type="hidden" name="Name" value="{$myReq["Name"]}"></label>
+                            <label>Topic<input name="Topic" value="{$myReq["Topic"]}"></label>
+                            <label>Type<input name="Type" value="{$myReq["Type"]}"></label>
             
-                echo $element;
+                            <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq["Invented on"]}"></label>
+                            <label>Invented_by<input name="Invented_by" value="{$myReq["Invented by"]}"></label>
+            
+                            <label>Owner<input name="Owner" value="{$myReq["Owner"]}"></label>
+            
+                            <label>Status<input name="Status" value="{$myReq["Status"]}"></label>
+                            <label>Solved by<input name="Solved_by" value="{$myReq["Solved by"]}"></label>
+                            <label>Priority<input name="Priority" value="{$myReq["Priority"]}"></label>
+                            <label>Effort_estimation<input name="Effort_estimation" value="{$myReq["Effort estimation"]}"></label>
+            
+                            <label>Description<input name="Description" value="{$myReq["Description"]}"></label>
+                            <label>Rationale<input name="Rationale" value="{$myReq["Rationale"]}"></label>
+            
+                            <label>Test_Cases<input name="Test_Cases" value="{$myReq["Test Cases"]}"></label>
+                            
+                            <p align="right"><input type="submit" value="save"></p>
+                        </form>
+                    </details>
+        
+                END;
+                    if("testcases" == $folder) 
+                        $element = <<<END
+                    
+                    <hr class="new5">
+                    <details>
+                        <summary>{$myReq["Name"]}</summary>
+                        <form id="{$pre}{$file_name}">
+                            <input type="hidden" name="id" value="{$file}">
+                            <input type="hidden" name="Name" value="{$myReq["Name"]}"></label>
+                
+                            <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq["Invented on"]}"></label>
+                            <label>Invented_by<input name="Invented_by" value="{$myReq["Invented by"]}"></label>
+                
+                            <label>Owner<input name="Owner" value="{$myReq["Owner"]}"></label>
+                
+                            <label>Description<input name="Description" value="{$myReq["Description"]}"></label>
+                            <label>Expected_Result<input name="Expected_Result" value="{$myReq["Expected Result"]}"></label>
+                
+                            <label>Note<input name="Note" value="{$myReq["Note"]}"></label>
+                            
+                            <p align="right"><input type="submit" value="save"></p>
+                        </form>
+                    </details>
+        
+                END;
+            
+                    echo $element;
+                }
             }
         }
     }
-    
-?>
-
-    <h2>testcases</h2>
-<?php
-
-    $dir = $projects_root . DIRECTORY_SEPARATOR . $active_project . DIRECTORY_SEPARATOR . "testcases";
-    $files1 = scandir($dir);
-    foreach ($files1 as $key => $value)
-    {
-        if (!in_array($value,array(".","..")))
-        {
-            $file = $dir . DIRECTORY_SEPARATOR . $value;
-            $info = pathinfo($value);
-            $file_name =  basename($file,'.'.$info['extension']);
-            
-            if (!is_dir($file))
-            {
-                $myReq = $myManager->getReqFromFile($file);
-                $pre = "test_";
-                
-                $script = <<<END
-                    const form_{$pre}{$file_name} = document.querySelector("#{$pre}{$file_name}");
-                    
-                    async function sendData_{$pre}{$file_name}() {
-                        // Associate the FormData object with the form element
-                        const formData_{$pre}{$file_name} = new FormData(form_{$pre}{$file_name});
-                        
-                        try {
-                            const response_{$pre}{$file_name} = await fetch("save.php", {
-                                method: "POST",
-                                body: formData_{$pre}{$file_name},
-                            });
-                            console.log(await response_{$pre}{$file_name}.json());
-                        } catch (e) {
-                            console.error(e);
-                        }
-                    }
-                    
-                    // Take over form submission
-                    form_{$pre}{$file_name}.addEventListener("submit", (event) => {
-                        event.preventDefault();
-                        sendData_{$pre}{$file_name}();
-                    });
-            END;
-                $whole_script .= $script;
-    
-                $element = <<<END
-                    
-                <hr class="new5">
-                <details>
-                    <summary>{$myReq["Name"]}</summary>
-                    <form id="{$pre}{$file_name}">
-                        <input type="hidden" name="id" value="{$file}">
-                        <input type="hidden" name="Name" value="{$myReq["Name"]}"></label>
-        
-                        <label>Invented_on<input type="date" id="Invented_on" name="Invented_on" value="{$myReq["Invented on"]}"></label>
-                        <label>Invented_by<input name="Invented_by" value="{$myReq["Invented by"]}"></label>
-        
-                        <label>Owner<input name="Owner" value="{$myReq["Owner"]}"></label>
-            
-                        <label>Description<input name="Description" value="{$myReq["Description"]}"></label>
-                        <label>Expected_Result<input name="Expected_Result" value="{$myReq["Expected Result"]}"></label>
-        
-                        <label>Note<input name="Note" value="{$myReq["Note"]}"></label>
-                        
-                        <p align="right"><input type="submit" value="save"></p>
-                    </form>
-                </details>
-
-            END;
-            
-                echo $element;
-            }
-        }
-    }
-    
 }
 ?>
     <script>
